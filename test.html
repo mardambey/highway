@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Highway Tests</title>
+<script type="text/javascript" src="lib/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="lib/dump_src.js"></script> <!-- DEBUG purposes, remove -->
+<script type="text/javascript" src="lib/highway.js"></script>
+</head>
+<body>
+
+<div id="header">...</div>
+<div id="content">...</div>
+<div id="footer">...</div>
+
+<textarea id="debug" cols="80" rows="20"></textarea>
+
+<script type="text/javascript">
+
+var highway = new Highway();
+
+highway.getSlice({
+	"id":"header",
+	"url":"slices/header.php",
+	"requires":["footer"]
+});
+
+highway.getSlice({
+	"id":"content",
+		"url":"slices/content.php",
+		"requires":["header", "footer"]
+});
+
+highway.getSlice({
+	"id":"footer",
+	"url":"slices/footer.php",
+	"requires":[]
+});
+
+Highway.run(highway);
+
+</script>
+
+</body>
+</html>

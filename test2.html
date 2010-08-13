@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>3 col layout with equalising columns and footer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" src="lib/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="lib/dump_src.js"></script>
+<script type="text/javascript" src="lib/highway.js"></script>
+<style type="text/css">
+* {margin:0;padding:0}
+/* commented backslash hack v2 \*/ 
+html, body{height:100%;} 
+/* end hack */ 
+p {margin:0 0 1em 0;padding:2px}
+
+body {
+	background:#d2da9c url(images/lcolbg.jpg) repeat-y left top;
+	color: #000;
+	position:relative;/* for ie7*/
+}
+#outer{
+	min-height:100%;
+	margin:0 140px;
+	background:#fff;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	color: #000;
+}
+
+* html #outer{height:100%;} /*IE treats height as min-height anyway*/
+#header{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:70px;
+	background:#304a00;
+	overflow:hidden;
+	color: #fff;
+}
+#header a{color:#fff;}
+#left {
+	position:relative;/*ie needs this to show float */
+	width:140px;
+	float:left;
+	margin-left:-139px;/*must be 1px less than width otherwise won't push footer down in some browsers */
+	color:#fff;
+	left:-1px;
+	padding-bottom:52px;/* clear footer*/
+}
+
+#right {
+	position:relative;/*ie needs this to show float */
+	width:140px;
+	float:right;
+	margin-right:-139px;/*must be 1px less than width otherwise won't push footer down in some browsers */
+	padding-top:71px;/* to clear header*/
+	color:#fff;
+	left:1px;
+	padding-bottom:52px;/* clear footer*/
+}
+ 
+#footer {
+	width:100%;
+	clear:both;
+	height:50px;
+	background: #304a00;
+	color: #fff;
+	text-align:center;
+	position:relative;
+	margin-top:-50px;/*drag footer from below the fold*/
+}
+#centercontent {
+	float:right;
+	width:100%;
+	position:relative;
+	padding-bottom:52px;/* clear footer*/
+ margin-left:-1px;
+}
+.outerwrap {
+	float: left;	
+	width: 100%;
+	padding-top:71px;/* to clear header*/
+	margin-right:-3px;/* to stop columns dropping*/
+}
+p.expand a:hover{display:block;height:300px;background:red}
+.clearer{
+	height:1px;
+	overflow:hidden;
+	margin-top:-1px;
+	clear:both;
+}
+</style>
+</head>
+<body>
+<div id="outer">
+	<div class="outerwrap">
+		<div id="centercontent"></div>
+		<div id="left"></div>
+		<div class="clearer"></div>
+	</div>
+	<!--end outer wrap -->
+	<div id="right"></div>
+	<div class="clearer"></div>
+</div>
+<!-- end outer div -->
+<div id="footer"></div>
+<div id="header"></div>
+
+<script type="text/javascript">
+
+var highway = new Highway();
+
+highway.getSlice({
+	"id":"header",
+	"url":"slices2/header.php",
+	"requires":[]
+});
+
+highway.getSlice({
+	"id":"footer",
+	"url":"slices2/footer.php",
+	"requires":[]
+});
+
+highway.getSlice({
+	"id":"centercontent",
+	"url":"slices2/centercontent.php",
+	"requires":["right", "left"]
+});
+
+highway.getSlice({
+	"id":"left",
+	"url":"slices2/left.php",
+	"requires":["header"]
+});
+
+highway.getSlice({
+	"id":"right",
+	"url":"slices2/right.php",
+	"requires":["left"]
+});
+
+</script>
+
+</body>
+</html>
