@@ -107,6 +107,14 @@ p.expand a:hover{display:block;height:300px;background:red}
 <div id="footer"></div>
 <div id="header"></div>
 
+
+<script type="text/javascript">
+function centerContentCompleteCb()
+{
+	$("#centercontent").html($("#centercontent").html() + "<br>And completion	cb fired!");
+}
+</script>
+
 <script type="text/javascript">
 
 var highway = new Highway();
@@ -126,7 +134,8 @@ highway.getSlice({
 highway.getSlice({
 	"id":"centercontent",
 	"url":"slices2/centercontent.php",
-	"requires":["right", "left"]
+	"requires":["right", "left"],
+	"onafterload":[centerContentCompleteCb]
 });
 
 highway.getSlice({
