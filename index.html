@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Highway by mardambey</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Highway</h1>
+        <h2>Parallel fetching and rendering JavaScript library with dependency resolving.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/mardambey/highway/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/mardambey/highway/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/mardambey/highway" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>What is Highway?</h3>
+
+<p>Parallel fetching and rendering JavaScript library with dependency
+resolving.</p>
+
+<h3>Example:</h3>
+
+<p>The following example loads a few slices in order using dependencies. One of
+the slices has an "onafterload" callback.</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+function centerContentCompleteCb()
+{
+    $("#centercontent").html($("#centercontent").html() + "&lt;br&gt;And completion   cb fired!");
+}
+&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+
+var highway = new Highway();
+
+highway.getSlice({
+    "id":"header",
+    "url":"slices2/header.php",
+    "requires":[]
+});
+
+highway.getSlice({
+    "id":"footer",
+    "url":"slices2/footer.php",
+    "requires":[]
+});
+
+highway.getSlice({
+    "id":"centercontent",
+    "url":"slices2/centercontent.php",
+    "requires":["right", "left"],
+    "onafterload":[centerContentCompleteCb]
+});
+
+highway.getSlice({
+    "id":"left",
+    "url":"slices2/left.php",
+    "requires":["header"]
+});
+
+highway.getSlice({
+    "id":"right",
+    "url":"slices2/right.php",
+    "requires":["left"]
+});
+
+&lt;/script&gt;
+</code></pre>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
