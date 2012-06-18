@@ -1,15 +1,14 @@
-What is Highway?
-================
+### What is Highway?
 
 Parallel fetching and rendering JavaScript library with dependency
 resolving.
 
-Example:
-========
+### Example:
 
 The following example loads a few slices in order using dependencies. One of
 the slices has an "onafterload" callback.
 
+```
 <script type="text/javascript">
 function centerContentCompleteCb()
 {
@@ -53,4 +52,4 @@ highway.getSlice({
 });
 
 </script>
-
+```
